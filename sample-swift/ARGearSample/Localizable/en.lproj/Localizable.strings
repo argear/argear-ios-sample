@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  ARGearSample
+
+  Created by Jihye on 2020/01/21.
+  Copyright © 2020 Seerslab. All rights reserved.
+*/
+
+// permissions
+"camera" = "Camera";
+"storage" = "Storage";
+"microphone" = "Microphone";
+"application_permissions" = "Application Permissions";
+"permission_message" = "Please allow the following\npermissions to use ARGear Sample.";
+"application_denied" = "Application Permissions";
+"denied_message" = "Please allow camera, storage, microphone \npermissions to use ARGear Sample.";
+"allow" = "Allow";
+
+// settings
+"auto_save" = "Auto save";
+"application_info" = "Application information";
+
+// qrcode
+"qrcode" = "QR Code";
+"qrcode_recognize_message" = "Please tap the button to scan the QR code.";
+
+// mode select view
+"photo" = "Photo";
+"video" = "Video";

@@ -1,0 +1,24 @@
+//
+//  PrefixHeader.pch
+//  ARGEARSample
+//
+//  Created by Jihye on 21/08/2019.
+//  Copyright © 2019 Seerslab. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <SDWebImage/SDWebImage.h>
+#import "Models.h"
+#import "RealmManager.h"
+#import "NetworkManager.h"
+#import "StickerManager.h"
+#import "Loading.h"
+
+#import "NSString+Localization.h"
+
+#endif /* PrefixHeader_pch */

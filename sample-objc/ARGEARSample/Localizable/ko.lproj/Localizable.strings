@@ -1,0 +1,29 @@
+/* 
+  Localization.strings
+  ARGEARSample
+
+  Created by Jihye on 07/11/2019.
+  Copyright © 2019 Seerslab. All rights reserved.
+*/
+
+// permissions
+"camera" = "카메라";
+"storage" = "저장공간";
+"microphone" = "오디오 녹음";
+"application_permissions" = "어플리케이션 권한 동의";
+"permission_message" = "ARGear Sample을 이용하시려면\n아래 권한에 반드시 동의 해주셔야 합니다.";
+"application_denied" = "어플리케이션 접근 제한";
+"denied_message" = "ARGear Sample을 이용하시려면 카메라,\n마이크및 사진 접근 권한을 허용해 주세요.";
+"allow" = "확인";
+
+// settings
+"auto_save" = "사진 자동저장";
+"application_info" = "어플리케이션 정보";
+
+// qrcode
+"qrcode" = "QR코드";
+"qrcode_recognize_message" = "QR 코드를 인식하기 위해\n후면 카메라 화면으로 전환 후 버튼을 눌러주세요";
+
+// mode select view
+"photo" = "사진";
+"video" = "비디오";
