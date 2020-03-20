@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3537DC0023E0379600F52CBA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3537DBFF23E0379600F52CBA /* SettingView.swift */; };
+		353FAD21242353E4004F16D5 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353FAD20242353E4004F16D5 /* UIView+extension.swift */; };
 		3563F70123C42D64000D61D7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3563F70023C42D63000D61D7 /* NetworkManager.swift */; };
 		35663B5723D6D5BC00ADFF07 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35663B5923D6D5BC00ADFF07 /* Localizable.strings */; };
 		35663B6023D6DE0400ADFF07 /* ARGBottomFunctionBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35663B5F23D6DE0400ADFF07 /* ARGBottomFunctionBaseView.swift */; };
@@ -195,6 +196,7 @@
 /* Begin PBXFileReference section */
 		204ACE7EDDE06AB94817F81F /* Pods-ARGearSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARGearSampleTests.release.xcconfig"; path = "Target Support Files/Pods-ARGearSampleTests/Pods-ARGearSampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		3537DBFF23E0379600F52CBA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		353FAD20242353E4004F16D5 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
 		3563F70023C42D63000D61D7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		35663B5823D6D5BC00ADFF07 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		35663B5A23D6D5CC00ADFF07 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				35EADA0123E19A4C002C3452 /* UIColor+extension.swift */,
 				35EADAFD23E956BE002C3452 /* UIImage+extension.swift */,
 				35A5554D23F2777200C7191A /* Int+extension.swift */,
+				353FAD20242353E4004F16D5 /* UIView+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1101,6 +1104,7 @@
 				35EADB0523E9890B002C3452 /* Filter.swift in Sources */,
 				35EADA2E23E40E69002C3452 /* ContentsCollectionView.swift in Sources */,
 				35663B9323E0083600ADFF07 /* PermissionView.swift in Sources */,
+				353FAD21242353E4004F16D5 /* UIView+extension.swift in Sources */,
 				35A5554E23F2777200C7191A /* Int+extension.swift in Sources */,
 				35EADA2623E3D535002C3452 /* BulgeCollectionViewCell.swift in Sources */,
 				35663B6E23D6E9D700ADFF07 /* SplashView.swift in Sources */,
@@ -1298,7 +1302,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seerslab.argear.sample;
 				PRODUCT_NAME = "ARGear Sample";
 				SWIFT_VERSION = 5.0;
@@ -1324,7 +1328,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seerslab.argear.sample;
 				PRODUCT_NAME = "ARGear Sample";
 				SWIFT_VERSION = 5.0;

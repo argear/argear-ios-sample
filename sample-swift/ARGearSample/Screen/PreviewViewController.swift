@@ -12,6 +12,8 @@ import ARGear
 
 class PreviewViewController: UIViewController {
     
+    var toast_preview_position = CGPoint(x: 0, y: 0)
+    
     let screenRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
     let topInsetViewHeightConstant: Float = 64.0
     let videoPathKey = "filePath"
@@ -36,6 +38,8 @@ class PreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        toast_preview_position = CGPoint(x: self.view.center.x, y: previewBottomFunctionView.frame.origin.y - 176.0)
         
         self.previewBottomFunctionView.delegate = self
         
@@ -84,8 +88,7 @@ class PreviewViewController: UIViewController {
         
         switch self.ratio {
         case ._16x9:
-            self.fullImageView.contentMode = self.isPreviewContentOrientationIsPortrait() ?
-                .scaleAspectFill : .scaleAspectFit
+            self.fullImageView.contentMode = .scaleAspectFit
             self.fullImageView.image = self.previewImage
         case ._4x3:
             self.topInsetViewHeight.constant = (screenRatio > 2.0) ? CGFloat(self.topInsetViewHeightConstant) : 0
@@ -156,6 +159,7 @@ class PreviewViewController: UIViewController {
         media.saveImage(toAlbum: self.previewImage!, success: { [weak self] in
             guard let self = self else { return }
 
+            self.view.showToast(message: "photo_video_saved_message".localized(), position: self.toast_preview_position)
             self.previewBottomFunctionView.showCheckButton()
         }, error: nil)
     }
@@ -167,6 +171,7 @@ class PreviewViewController: UIViewController {
         media.saveVideo(toAlbum: videoPath, success: { [weak self] in
             guard let self = self else { return }
 
+            self.view.showToast(message: "photo_video_saved_message".localized(), position: self.toast_preview_position)
             self.previewBottomFunctionView.showCheckButton()
         }, error: nil)
     }

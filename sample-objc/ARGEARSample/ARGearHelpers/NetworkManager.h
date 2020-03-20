@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define API_HOST @"https://apis.argear.io/api/v3/"
 #define API_KEY @"48cdd456621ebddb5283f516"
 #define API_SECRET_KEY @"e0ea29ce12178111d2a5e6093a6e048a2a6248b921f092f68c93992ca29a45ee"
-#define API_AUTH_KEY @"U2FsdGVkX19DguB6YrrW+9R193+Jsekcvt38I7dROnYZ7NkmCuCff843TkNC4CWTgYVplAnXjirwOxK/uAGVqQ=="
+#define API_AUTH_KEY @"U2FsdGVkX19Sm4NdLCm7kZRApYCcdTaQqY7RbgodU5GHd9plkoHb24uqdAv0MICHb1aldMXpCHccDDeCTWqq/A=="
 
 @interface NetworkManager : NSObject
 

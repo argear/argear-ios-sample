@@ -8,6 +8,6 @@ All the essential AR features your users want packaged into a lightweight SDK
 
 See the [ARGear iOS Docs](//docs.argear.io/ios/api-in-detail).
 
-## Sample App on Playstore
+## Sample App on App Store
 
 Donwload sample app from [here](//apps.apple.com/kr/app/id1490365456) and use sample stickers, filters.

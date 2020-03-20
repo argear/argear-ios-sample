@@ -7,15 +7,18 @@
 //
 
 #import "PreviewViewController.h"
+#import "UIView+Toast.h"
 
 #define screenRatio [[UIScreen mainScreen] bounds].size.height / [[UIScreen mainScreen] bounds].size.width
 #define topInsetViewHeightConstant 64.f
+#define TOAST_PREVIEW_POSITION CGPointMake([self view].center.x, [[self previewBottomFunctionView] frame].origin.y - 96.f)
 
 @interface PreviewViewController ()
 
 @end
 
 @implementation PreviewViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,6 +72,7 @@
     if (_mode == ARGMediaModePhoto) {
         
         [_media saveImageToAlbum:_previewImage success:^{
+            [[self view] showToast:[@"photo_video_saved_message" localized] position:TOAST_PREVIEW_POSITION];
             [[weakSelf previewBottomFunctionView] showCheckButton];
         } error:nil];
     } else if (_mode == ARGMediaModeVideo) {
@@ -79,6 +83,7 @@
         }
         
         [_media saveVideoToAlbum:videoPath success:^{
+            [[self view] showToast:[@"photo_video_saved_message" localized] position:TOAST_PREVIEW_POSITION];
             [[weakSelf previewBottomFunctionView] showCheckButton];
         } error:nil];
     }
@@ -96,12 +101,7 @@
     
     switch (_ratio) {
         case ARGMediaRatio_16x9:
-            
-            if ([self isPreviewContentOrientationIsPortrait]) {
-                [_fullImageView setContentMode:UIViewContentModeScaleAspectFill];
-            } else {
-                [_fullImageView setContentMode:UIViewContentModeScaleAspectFit];
-            }
+            [_fullImageView setContentMode:UIViewContentModeScaleAspectFit];
             [_fullImageView setImage:_previewImage];
             break;
         case ARGMediaRatio_4x3:

@@ -27,3 +27,6 @@
 // mode select view
 "photo" = "Photo";
 "video" = "Video";
+
+// photo, video saved message
+"photo_video_saved_message" = "The file has been saved to your Photos.";

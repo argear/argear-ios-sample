@@ -19,6 +19,7 @@
 		352BDA902318C4DB0001EE23 /* RealmManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 352BDA8F2318C4DB0001EE23 /* RealmManager.m */; };
 		3534E58B23795DC900109C27 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 3534E58A23795DC900109C27 /* UIImage+Color.m */; };
 		3534E5B4237BFAC900109C27 /* ARGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 3534E5B3237BFAC900109C27 /* ARGPreferences.m */; };
+		353FAD1F242345B0004F16D5 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 353FAD1E242345B0004F16D5 /* UIView+Toast.m */; };
 		353FC69F234358AE00A60529 /* BulgeCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 353FC69E234358AE00A60529 /* BulgeCollectionView.m */; };
 		353FC6A3234358C400A60529 /* BulgeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 353FC6A1234358C400A60529 /* BulgeCollectionViewCell.m */; };
 		353FC6A4234358C400A60529 /* BulgeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 353FC6A2234358C400A60529 /* BulgeCollectionViewCell.xib */; };
@@ -41,6 +42,7 @@
 		3547CA9A230AA06F00A648E7 /* Permission.m in Sources */ = {isa = PBXBuildFile; fileRef = 3547CA99230AA06F00A648E7 /* Permission.m */; };
 		3547CACB230FC59700A648E7 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3547CACA230FC59700A648E7 /* GLView.m */; };
 		3547CACE2313D32300A648E7 /* ShaderUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3547CACD2313D32300A648E7 /* ShaderUtilities.m */; };
+		3556873C24248CD30030C110 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3556873A24248CD30030C110 /* Utils.m */; };
 		3588E0DD2397A67B001459D3 /* 0078.png in Resources */ = {isa = PBXBuildFile; fileRef = 3588E0832397A66E001459D3 /* 0078.png */; };
 		3588E0DE2397A67B001459D3 /* 0035.png in Resources */ = {isa = PBXBuildFile; fileRef = 3588E0842397A66F001459D3 /* 0035.png */; };
 		3588E0DF2397A67B001459D3 /* 0040.png in Resources */ = {isa = PBXBuildFile; fileRef = 3588E0852397A66F001459D3 /* 0040.png */; };
@@ -202,6 +204,8 @@
 		3534E58A23795DC900109C27 /* UIImage+Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		3534E5B2237BFAC900109C27 /* ARGPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARGPreferences.h; sourceTree = "<group>"; };
 		3534E5B3237BFAC900109C27 /* ARGPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARGPreferences.m; sourceTree = "<group>"; };
+		353FAD1D242345B0004F16D5 /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		353FAD1E242345B0004F16D5 /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		353FC69D234358AE00A60529 /* BulgeCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulgeCollectionView.h; sourceTree = "<group>"; };
 		353FC69E234358AE00A60529 /* BulgeCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulgeCollectionView.m; sourceTree = "<group>"; };
 		353FC6A0234358C400A60529 /* BulgeCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulgeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -239,6 +243,8 @@
 		3547CACA230FC59700A648E7 /* GLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
 		3547CACC2313D32300A648E7 /* ShaderUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderUtilities.h; sourceTree = "<group>"; };
 		3547CACD2313D32300A648E7 /* ShaderUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderUtilities.m; sourceTree = "<group>"; };
+		3556873A24248CD30030C110 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		3556873B24248CD30030C110 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		3588E0832397A66E001459D3 /* 0078.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0078.png; sourceTree = "<group>"; };
 		3588E0842397A66F001459D3 /* 0035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0035.png; sourceTree = "<group>"; };
 		3588E0852397A66F001459D3 /* 0040.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0040.png; sourceTree = "<group>"; };
@@ -579,12 +585,16 @@
 		353FC69B2343256C00A60529 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3556873B24248CD30030C110 /* Utils.h */,
+				3556873A24248CD30030C110 /* Utils.m */,
 				359CD2A923277FB0009E9C7C /* Loading.h */,
 				359CD2AA23277FB0009E9C7C /* Loading.m */,
 				35ADCA0023742E2800A1BACA /* NSString+Localization.h */,
 				35ADCA0123742E2800A1BACA /* NSString+Localization.m */,
 				3534E58923795DC900109C27 /* UIImage+Color.h */,
 				3534E58A23795DC900109C27 /* UIImage+Color.m */,
+				353FAD1D242345B0004F16D5 /* UIView+Toast.h */,
+				353FAD1E242345B0004F16D5 /* UIView+Toast.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1067,7 +1077,9 @@
 				353FC6D2235028BA00A60529 /* Filter.m in Sources */,
 				353FC6C4234C81E300A60529 /* Item.m in Sources */,
 				3547CA97230A98D900A648E7 /* ARGCamera.m in Sources */,
+				353FAD1F242345B0004F16D5 /* UIView+Toast.m in Sources */,
 				359CD2D723278485009E9C7C /* StickerView.m in Sources */,
+				3556873C24248CD30030C110 /* Utils.m in Sources */,
 				3519E79E22F8113D00F2C8FF /* MainViewController.m in Sources */,
 				359CD2C723278348009E9C7C /* BeautyView.m in Sources */,
 				353FC6A3234358C400A60529 /* BulgeCollectionViewCell.m in Sources */,
@@ -1271,7 +1283,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seerslab.argear.sample;
 				PRODUCT_NAME = "ARGear Sample";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1297,7 +1309,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seerslab.argear.sample;
 				PRODUCT_NAME = "ARGear Sample";
 				TARGETED_DEVICE_FAMILY = 1;

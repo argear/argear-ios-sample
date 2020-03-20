@@ -78,7 +78,7 @@ class RatioView: UIView {
     
     private func animate(_ animate: @escaping RatioViewCompletion, completion: RatioViewCompletion?) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 animate()
                 self.layoutIfNeeded()
             }) { complete in

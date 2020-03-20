@@ -15,7 +15,7 @@
     if (self) {
         _isDisplaying = NO;
         
-        _sessionPreset = AVCaptureSessionPresetiFrame1280x720;
+        _sessionPreset = AVCaptureSessionPresetPhoto;
         _currentCameraPosition = AVCaptureDevicePositionFront;
         _currentRatio = ARGMediaRatio_4x3;
         
@@ -180,8 +180,6 @@
     } else if (_currentRatio == ARGMediaRatio_16x9) {
         [self setCurrentRatio:ARGMediaRatio_4x3];
     }
-    
-    _sessionPreset = AVCaptureSessionPresetiFrame1280x720;
     
     [self stopCamera];
     [self startCamera];

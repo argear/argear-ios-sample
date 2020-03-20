@@ -20,6 +20,8 @@
 #import "PreviewViewController.h"
 
 #import <ARGear/ARGear.h>
+#import "UIView+Toast.h"
+#import "Utils.h"
 
 @interface MainViewController () <ARGCameraDelegate, ARGSessionDelegate>
 @property (nonatomic, strong) ARGSession *argSession;       // ARGear Session (ARGear main handler)
@@ -32,6 +34,8 @@
 @end
 
 @implementation MainViewController
+
+#define TOAST_MAIN_POSITION CGPointMake([self view].center.x, [[self mainBottomFunctionView] frame].origin.y + 24.f)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -79,6 +83,7 @@
     }];
     
     [[BeautyManager shared] start];
+    [[Utils shared] setBoolValue:UTILS_PHOTOSAVE_NEED_SHOW_MESSAGE value:YES];
 }
 
 
@@ -318,20 +323,36 @@
 }
 
 - (void)takePictureFinished:(UIImage *)image {
-    [_argMedia saveImage:image goToPreview:^{
+    [_argMedia saveImage:image saved:^{
+        if ([self isNeedShowAutoSaveMessage]) {
+            [[self view] showToast:[@"photo_video_saved_message" localized] position:TOAST_MAIN_POSITION];
+        }
+    } goToPreview:^{
         [self goPreview:image];
     }];
 }
 
 - (void)recordVideoFinished:(NSDictionary *)videoInfo {
-    [_argMedia saveVideo:videoInfo goToPreview:^{
+    [_argMedia saveVideo:videoInfo saved:^{
+        if ([self isNeedShowAutoSaveMessage]) {
+            [[self view] showToast:[@"photo_video_saved_message" localized] position:TOAST_MAIN_POSITION];
+        }
+    } goToPreview:^{
         [self goPreviewVideo:videoInfo];
     }];
 }
 
+- (BOOL)isNeedShowAutoSaveMessage {
+    if ([[Utils shared] getBoolValue:UTILS_PHOTOSAVE_NEED_SHOW_MESSAGE]) {
+        [[Utils shared] setBoolValue:UTILS_PHOTOSAVE_NEED_SHOW_MESSAGE value:NO];
+        
+        return YES;
+    }
+    return NO;
+}
+
 // MARK: - Touch Lock Control
-- (void)touchLock:(BOOL)lock
-{
+- (void)touchLock:(BOOL)lock {
     if(!lock) {
         [_touchLockView setHidden:YES];
         [_mainTopFunctionView setEnableButtons];

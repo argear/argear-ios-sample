@@ -27,3 +27,6 @@
 // mode select view
 "photo" = "사진";
 "video" = "비디오";
+
+// photo, video saved message
+"photo_video_saved_message" = "파일이 앨범에 저장되었습니다.";

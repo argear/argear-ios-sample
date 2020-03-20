@@ -63,10 +63,8 @@ typedef NS_ENUM(NSInteger, ARGMediaVideoBitrate) {
                    save:(void (^ __nullable)(NSDictionary * __nonnull videoInfo))saveBlock;
 
 // Album
-- (void)storeAutoSave;
-
-- (void)saveImage:(UIImage *)image goToPreview:(GoToPreviewBlock)previewBlock;
-- (void)saveVideo:(NSDictionary *)videoInfo goToPreview:(GoToPreviewBlock)previewBlock;
+- (void)saveImage:(UIImage *)image saved:(ARGMediaSaveSuccess)saved goToPreview:(GoToPreviewBlock)previewBlock;
+- (void)saveVideo:(NSDictionary *)videoInfo saved:(ARGMediaSaveSuccess)saved goToPreview:(GoToPreviewBlock)previewBlock;
 
 - (void)saveImageToAlbum:(UIImage *)image success:(ARGMediaSaveSuccess)success error:(ARGMediaSaveError)error;
 - (void)saveVideoToAlbum:(NSURL *)url success:(ARGMediaSaveSuccess)success error:(ARGMediaSaveError)error;

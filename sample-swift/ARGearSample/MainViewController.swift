@@ -14,6 +14,8 @@ import ARGear
 
 public final class MainViewController: UIViewController {
     
+    var toast_main_position = CGPoint(x: 0, y: 0)
+    
     // MARK: - ARGearSDK properties
     private var argConfig: ARGConfig?
     private var argSession: ARGSession?
@@ -205,6 +207,8 @@ public final class MainViewController: UIViewController {
         self.ratioView.setRatio(arCamera.ratio)
         self.settingView.setPreferences(autoSave: self.arMedia.autoSave, showLandmark: self.preferences.showLandmark, videoBitrate: self.preferences.videoBitrate)
         
+        toast_main_position = CGPoint(x: self.view.center.x, y: mainBottomFunctionView.frame.origin.y - 24.0)
+        
         ARGLoading.prepare()
     }
     
@@ -268,6 +272,7 @@ public final class MainViewController: UIViewController {
             let transform = angleTransform.concatenating(flipTransform)
             self.cameraPreviewCALayer.setAffineTransform(transform)
             self.cameraPreviewCALayer.frame = CGRect(x: 0, y: -self.getPreviewY(), width: self.cameraPreviewCALayer.frame.size.width, height: self.cameraPreviewCALayer.frame.size.height)
+            self.view.backgroundColor = .white
             CATransaction.commit()
         }
     }
@@ -282,7 +287,11 @@ public final class MainViewController: UIViewController {
         
         if #available(iOS 11.0, *), self.arCamera.ratio != ._16x9 {
             if let topInset = UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets.top {
-                previewY += topInset/2
+                if self.arCamera.ratio == ._1x1 {
+                    previewY += topInset/2
+                } else {
+                    previewY += topInset
+                }
             }
         }
         
@@ -512,7 +521,9 @@ extension MainViewController: MainBottomFunctionDelegate {
     func photoButtonActionFinished(image: UIImage?) {
         guard let saveImage = image else { return }
         
-        self.arMedia.save(saveImage) {
+        self.arMedia.save(saveImage, saved: {
+            self.view.showToast(message: "photo_video_saved_message".localized(), position: self.toast_main_position)
+        }) {
             self.goPreview(content: saveImage)
         }
     }
@@ -520,7 +531,9 @@ extension MainViewController: MainBottomFunctionDelegate {
     func videoButtonActionFinished(videoInfo: Dictionary<String, Any>?) {
         guard let info = videoInfo else { return }
         
-        self.arMedia.saveVideo(info) {
+        self.arMedia.saveVideo(info, saved: {
+            self.view.showToast(message: "photo_video_saved_message".localized(), position: self.toast_main_position)
+        }) {
             self.goPreview(content: info)
         }
     }
