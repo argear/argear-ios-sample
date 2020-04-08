@@ -39,6 +39,14 @@ class ContentView: ARGBottomFunctionBaseView {
         self.contentsCollectionView.setRatio(ratio)
     }
     
+    override func open() {
+        super.open()
+        
+        BulgeManager.shared.off()
+        
+        contentsCollectionView.reload()
+    }
+    
     func setButtons(ratio: ARGMediaRatio) {
         var clearButtonImageName = kContentViewClearButtonName
         if self.tag == ARGMediaRatio._16x9.rawValue {

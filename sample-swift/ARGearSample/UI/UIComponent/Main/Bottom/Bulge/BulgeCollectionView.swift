@@ -32,7 +32,11 @@ class BulgeCollectionView: ARGBottomFunctionBaseCollectionView {
         
         self.register(UINib(nibName: kBulgeCellNibName, bundle: nil), forCellWithReuseIdentifier: kBulgeCellIdentifier)
         
-        self.selectedIndexPath = IndexPath(row: 1, section: 0)
+        self.selectedIndexPath = IndexPath(row: 0, section: 0)
+    }
+    
+    func reload() {
+        self.reloadData()
     }
 }
 
@@ -45,7 +49,7 @@ extension BulgeCollectionView: UICollectionViewDelegate {
         }
         
         self.selectedIndexPath = indexPath
-        self.reloadData()
+        self.reload()
     }
 }
 

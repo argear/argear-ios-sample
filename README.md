@@ -6,7 +6,7 @@ All the essential AR features your users want packaged into a lightweight SDK
 
 ## API Reference
 
-See the [ARGear iOS Docs](//docs.argear.io/ios/api-in-detail).
+See the [ARGear iOS Docs](//docs.argear.io/ios/).
 
 ## Sample App on App Store
 

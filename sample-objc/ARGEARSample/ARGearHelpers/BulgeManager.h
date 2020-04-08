@@ -13,12 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BulgeManager : NSObject
 @property (nonatomic, assign) ARGSession *session;
+@property (nonatomic, assign) ARGContentItemBulge mode;
 
 + (BulgeManager *)shared;
 
-- (void)on;
 - (void)off;
-- (void)setFunMode:(NSInteger)mode;
+- (void)setFunMode:(ARGContentItemBulge)mode;
 
 @end
 

@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
 - (void)setRatio:(ARGMediaRatio)ratio;
+- (void)reload;
 
 @end
 

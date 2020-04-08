@@ -8,6 +8,8 @@
 
 #import "BeautyView.h"
 #import "UIImage+Color.h"
+#import "BulgeManager.h"
+#import "StickerManager.h"
 
 @implementation BeautyView
 
@@ -47,6 +49,9 @@
 
 - (void)open {
     [self setHidden:NO];
+    
+    [[BulgeManager shared] off];
+    [[StickerManager shared] clearSticker];
 }
 
 - (void)close {
@@ -113,6 +118,11 @@
 - (IBAction)resetButtonAction:(UIButton *)sender {
     
     [[BeautyManager shared] setDefault];
+    
+    NSIndexPath *selectedIndexPath = [_beautyCollectionView selectedIndexPath];
+    CGFloat beautyValue = [[BeautyManager shared] getBeautyValue:[selectedIndexPath row]];
+    
+    [_slider setValue:beautyValue];
 }
 
 #pragma mark - UISlider

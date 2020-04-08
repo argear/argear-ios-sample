@@ -22,10 +22,24 @@
 
 - (void)checked {
     [_filterCheckImage setHidden:NO];
+    [_filterNameLabel setHidden:NO];
 }
 
 - (void)unchecked {
     [_filterCheckImage setHidden:YES];
+    [_filterNameLabel setHidden:NO];
+}
+
+- (void)disableButtonCell:(ARGMediaRatio)ratio {
+    [_filterCheckImage setHidden:YES];
+    [_filterNameLabel setHidden:YES];
+    
+    NSString *iconName = @"icDisabledBlackOff";
+    if (ratio == ARGMediaRatio_16x9) {
+        iconName = @"icDisabledWhiteOff";
+    }
+    
+    [_filterImage setImage:[UIImage imageNamed:iconName]];
 }
 
 - (void)setData:(Item *)item {

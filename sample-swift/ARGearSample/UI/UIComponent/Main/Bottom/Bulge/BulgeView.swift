@@ -28,24 +28,16 @@ class BulgeView: ARGBottomFunctionBaseView {
     override func open() {
         super.open()
         
-        var isStartBulge = true
-        if let selectedBulge = self.bulgeCollectionView.selectedIndexPath {
-            if selectedBulge.row == 0 {
-                isStartBulge = false
-            } else {
-                BulgeManager.shared.setFunMode(ARGContentItemBulge(rawValue: selectedBulge.row)!)
-            }
-        }
+        ContentManager.shared.clearContent()
         
-        if isStartBulge {
-            BulgeManager.shared.on()
+        if BulgeManager.shared.mode == .NONE {
+            bulgeCollectionView.selectedIndexPath = IndexPath(row: 0, section: 0)
         }
+        bulgeCollectionView.reload()
     }
     
     override func close() {
         super.close()
-        
-        BulgeManager.shared.off()
     }
     
     override func setRatio(_ ratio: ARGMediaRatio) {
@@ -62,7 +54,6 @@ class BulgeView: ARGBottomFunctionBaseView {
                     if indexPath.row == 0 {
                         BulgeManager.shared.off()
                     } else {
-                        BulgeManager.shared.on()
                         BulgeManager.shared.setFunMode(ARGContentItemBulge(rawValue: indexPath.row)!)
                     }
                 }

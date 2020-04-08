@@ -36,17 +36,16 @@
 - (void)open {
     [self setHidden:NO];
     
-    BOOL isStartBulge = ([[_bulgeCollectionView selectedIndexPath] row] == 0) ? NO : YES;
-    
-    if (isStartBulge) {
-        [[BulgeManager shared] on];
+    [[StickerManager shared] clearSticker];
+
+    if ([[BulgeManager shared] mode] == ARGContentItemBulgeNONE) {
+        [_bulgeCollectionView setSelectedIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     }
+    [_bulgeCollectionView reload];
 }
 
 - (void)close {
     [self setHidden:YES];
-    
-    [[BulgeManager shared] off];
 }
 
 - (void)setRatio:(ARGMediaRatio)ratio {
@@ -84,7 +83,6 @@
                 // disable button
                 [[BulgeManager shared] off];
             } else {
-                [[BulgeManager shared] on];
                 [[BulgeManager shared] setFunMode:[indexPath row]];
             }
         }

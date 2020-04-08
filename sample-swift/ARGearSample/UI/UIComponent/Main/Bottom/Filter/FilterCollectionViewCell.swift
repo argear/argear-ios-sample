@@ -49,10 +49,24 @@ class FilterCollectionViewCell: UICollectionViewCell {
     
     func checked() {
         self.filterCheckImage.isHidden = false
+        filterNameLabel.isHidden = false
     }
     
     func unchecked() {
         self.filterCheckImage.isHidden = true
+        filterNameLabel.isHidden = false
+    }
+    
+    func disableButtonCell(ratio: ARGMediaRatio) {
+        filterCheckImage.isHidden = true
+        filterNameLabel.isHidden = true
+        
+        var iconName = "icDisabledBlackOff"
+        if ratio == ._16x9 {
+            iconName = "icDisabledWhiteOff"
+        }
+        
+        filterImage.image = UIImage(named: iconName)
     }
     
     func setFilter(_ filter: Item) {

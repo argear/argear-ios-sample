@@ -8,6 +8,7 @@
 
 #import "StickerView.h"
 #import "StickersData.h"
+#import "BulgeManager.h"
 
 @implementation StickerView
 
@@ -39,6 +40,8 @@
     [self load];
 
     [self setHidden:NO];
+    
+    [[BulgeManager shared] off];
 }
 
 - (void)close {

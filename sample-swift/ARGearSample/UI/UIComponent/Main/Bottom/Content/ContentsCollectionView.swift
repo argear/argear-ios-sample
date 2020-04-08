@@ -38,6 +38,10 @@ class ContentsCollectionView: ARGBottomFunctionBaseCollectionView {
         self.tag = ratio.rawValue
     }
     
+    func reload() {
+        self.reloadData()
+    }
+    
     func clearContent() {
         if
             let indexPath = self.selectedIndexPath,

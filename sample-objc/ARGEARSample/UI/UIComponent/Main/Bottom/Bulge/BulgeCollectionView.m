@@ -7,6 +7,7 @@
 //
 
 #import "BulgeCollectionView.h"
+#import "BulgeManager.h"
 
 #define kBulgeCellNibName @"BulgeCollectionViewCell"
 #define kBulgeCellIdentifier @"bulgecell"
@@ -40,7 +41,7 @@
     
     [self registerNib:[UINib nibWithNibName:kBulgeCellNibName bundle:nil] forCellWithReuseIdentifier:kBulgeCellIdentifier];
     
-    _selectedIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -50,7 +51,7 @@
     }
     
     [self setSelectedIndexPath:indexPath];
-    [self reloadData];
+    [self reload];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -79,7 +80,7 @@
         [iconName appendString:@"Black"];
     }
     
-    if (index > 0 && (index != [_selectedIndexPath row])) {
+    if (index > 0 && (index != [[BulgeManager shared] mode])) {
         [iconName appendString:@"Off"];
     }
     
@@ -89,6 +90,10 @@
 - (void)setRatio:(ARGMediaRatio)ratio {
     
     [self setTag:ratio];
+    [self reload];
+}
+
+- (void)reload {
     [self reloadData];
 }
 

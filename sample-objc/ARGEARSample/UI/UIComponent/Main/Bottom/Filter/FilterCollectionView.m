@@ -41,8 +41,13 @@
         return;
     }
     
-    Item *item = _filtersArray[[indexPath row]];
+    if ([indexPath row] == 0) {
+        [[FilterManager shared] clearFilter];
+        return;
+    }
     
+    Item *item = _filtersArray[[indexPath row] - 1];
+
     __weak FilterCollectionView *weakSelf = self;
     [[FilterManager shared] setFilter:item success:^{
         [weakSelf setSelectedIndexPath:indexPath];
@@ -53,7 +58,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [_filtersArray count];
+    return [_filtersArray count] + 1;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -62,13 +67,18 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FilterCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kFilterCellIdentifier forIndexPath:indexPath];
+    
+    if ([indexPath row] == 0) {
+        [cell disableButtonCell:[self tag]];
+        return cell;
+    }
 
     [cell unchecked];
     if ([indexPath isEqual:_selectedIndexPath]) {
         [cell checked];
     }
     
-    [cell setData:_filtersArray[[indexPath row]]];
+    [cell setData:_filtersArray[[indexPath row] - 1]];
     [cell setFilterNameLabelColor:[self tag]];
     
     return cell;

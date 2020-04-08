@@ -13,11 +13,9 @@ class BulgeManager {
     static let shared = BulgeManager()
     
     var argSession: ARGSession?
+    var mode: ARGContentItemBulge = .NONE
     
     init() {
-    }
-    
-    public func on() {
     }
     
     public func off() {
@@ -25,6 +23,8 @@ class BulgeManager {
             else { return }
         
         contents.setBulge(.NONE)
+        
+        mode = .NONE
     }
     
     public func setFunMode(_ mode: ARGContentItemBulge) {
@@ -32,5 +32,7 @@ class BulgeManager {
             else { return }
         
         contents.setBulge(mode)
+        
+        self.mode = mode
     }
 }

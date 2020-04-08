@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)checked;
 - (void)unchecked;
+- (void)disableButtonCell:(ARGMediaRatio)ratio;
 - (void)setData:(Item *)item;
 - (void)setFilterNameLabelColor:(ARGMediaRatio)ratio;
 

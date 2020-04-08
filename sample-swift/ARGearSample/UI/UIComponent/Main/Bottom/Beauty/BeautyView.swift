@@ -50,6 +50,9 @@ class BeautyView: ARGBottomFunctionBaseView {
             beautyIndex = selectedBeauty.row
         }
         self.slider.value = BeautyManager.shared.getBeautyValue(type: ARGContentItemBeauty(rawValue: beautyIndex)!)
+        
+        BulgeManager.shared.off()
+        ContentManager.shared.clearContent()
     }
     
     override func setRatio(_ ratio: ARGMediaRatio) {
@@ -91,6 +94,12 @@ class BeautyView: ARGBottomFunctionBaseView {
     
     @IBAction func resetButtonAction(_ sender: UIButton) {
         BeautyManager.shared.setDefault()
+        
+        if let selectedIndexPath = beautyCollectionView.selectedIndexPath {
+            let beautyValue = BeautyManager.shared.getBeautyValue(type: ARGContentItemBeauty(rawValue: selectedIndexPath.row) ?? .vline)
+            
+            slider.setValue(beautyValue, animated: false)
+        }
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {

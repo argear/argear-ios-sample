@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qxD-UY-PIt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qxD-UY-PIt">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -367,13 +367,13 @@
                                         </connections>
                                     </slider>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v7a-oM-tl6" customClass="FilterCollectionView">
-                                        <rect key="frame" x="0.0" y="86" width="414" height="76"/>
+                                        <rect key="frame" x="0.0" y="86" width="414" height="92"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="76" id="UTN-Q7-R6D"/>
+                                            <constraint firstAttribute="height" constant="92" id="UTN-Q7-R6D"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="16" minimumInteritemSpacing="0.0" id="rLG-sA-VHs">
-                                            <size key="itemSize" width="51" height="76"/>
+                                            <size key="itemSize" width="67" height="92"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
@@ -440,8 +440,6 @@
                                             <constraint firstItem="1hk-aD-S8t" firstAttribute="top" secondItem="uej-1B-Vdk" secondAttribute="top" id="zDW-T6-bvD"/>
                                         </constraints>
                                         <inset key="scrollIndicatorInsets" minX="14" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <viewLayoutGuide key="contentLayoutGuide" id="xun-10-xPF"/>
-                                        <viewLayoutGuide key="frameLayoutGuide" id="Coa-X2-uWe"/>
                                         <connections>
                                             <outlet property="contentView" destination="1hk-aD-S8t" id="oXa-DA-I6n"/>
                                             <outlet property="contentViewWidth" destination="HXd-Wd-kCc" id="X4W-a8-0yF"/>

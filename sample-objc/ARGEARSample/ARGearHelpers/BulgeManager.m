@@ -22,19 +22,21 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _mode = ARGContentItemBulgeNONE;
     }
     return self;
 }
 
-- (void)on {
-}
-
 - (void)off {
-    [_session.contents setBulge:ARGContentItemBulgeNONE];
+    [[_session contents] setBulge:ARGContentItemBulgeNONE];
+    
+    _mode = ARGContentItemBulgeNONE;
 }
 
-- (void)setFunMode:(NSInteger)mode {
-    [_session.contents setBulge:mode];
+- (void)setFunMode:(ARGContentItemBulge)mode {
+    [[_session contents] setBulge:mode];
+    
+    _mode = mode;
 }
 
 @end
