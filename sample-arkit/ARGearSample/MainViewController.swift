@@ -54,6 +54,11 @@ public final class MainViewController: UIViewController {
         
         NetworkManager.shared.argSession = argSession
     }
+    
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        stopARGSession()
+    }
 
     
     // MARK: - ARGearSDK setupConfig
@@ -109,6 +114,10 @@ public final class MainViewController: UIViewController {
     private func runARGSession() {
 
         argSession?.run()
+    }
+    
+    private func stopARGSession() {
+        argSession?.pause()
     }
     
     // MARK: ARGScene ARKit Session

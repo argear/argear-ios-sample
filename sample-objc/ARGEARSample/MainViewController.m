@@ -51,6 +51,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self stopARGSession];
 }
 
 - (void)dealloc {
@@ -119,6 +120,10 @@
         
         [self setCameraInfo];
     }];
+}
+
+- (void)stopARGSession {
+    [_argSession pause];
 }
 
 - (void)setCameraInfo {

@@ -68,6 +68,11 @@ public final class MainViewController: UIViewController {
         runARGSession()
         
     }
+    
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        stopARGSession()
+    }
 
     deinit {
         removeObservers()
@@ -309,6 +314,10 @@ public final class MainViewController: UIViewController {
     private func runARGSession() {
 
         argSession?.run()
+    }
+    
+    private func stopARGSession() {
+        argSession?.pause()
     }
     
     func removeSplashAfter(_ sec: TimeInterval) {
