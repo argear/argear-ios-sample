@@ -12,8 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef struct ARGAuthCallback {
-    __unsafe_unretained void (^ _Nullable Success) (NSString * _Nullable url);
-    __unsafe_unretained void (^ _Nullable Error) (ARGStatusCode code);
+    void (^ _Nullable Success) (NSString * _Nullable url);
+    void (^ _Nullable Error) (ARGStatusCode code);
 } ARGAuthCallback;
 
 @interface ARGAuth : NSObject
