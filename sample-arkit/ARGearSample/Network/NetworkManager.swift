@@ -43,46 +43,46 @@ class NetworkManager {
     }
 
     func downloadItem(url: String?, title: String?, type: String?) {
+        
+        let authCallback : ARGAuthCallback = {(url: String?, code: ARGStatusCode) in
+            if (code.rawValue == ARGStatusCode.SUCCESS.rawValue) {
+                let downloadUrl = URL(string: url!)!
+                let task = URLSession.shared.downloadTask(with: downloadUrl) { (url, response, error) in
 
-        let authCallback: ARGAuthCallback = ARGAuthCallback(Success: { (url: String?) in
-
-            let downloadUrl = URL(string: url!)!
-            let task = URLSession.shared.downloadTask(with: downloadUrl) { (url, response, error) in
-
-                if let error = error {
-                    print("error: \(error)")
-                } else {
-                    if let _ = response as? HTTPURLResponse {
-                    }
-
-                    var cachesDirectory: URL? = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first
-                    cachesDirectory?.appendPathComponent((response?.suggestedFilename)!)
-
-                    if let targetPath = url, let caches = cachesDirectory {
-
-                        let fileManager = FileManager.default
-                        do {
-                            try fileManager.copyItem(at: targetPath, to: caches)
-                        } catch _ {
+                    if let error = error {
+                        print("error: \(error)")
+                    } else {
+                        if let _ = response as? HTTPURLResponse {
                         }
 
-                        if let session = self.argSession, let contents = session.contents {
+                        var cachesDirectory: URL? = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first
+                        cachesDirectory?.appendPathComponent((response?.suggestedFilename)!)
 
-                            var itemType: ARGContentItemType = .sticker
-                            if let typeString = type {
-                                if typeString == "filter" {
-                                    itemType = .filter
-                                }
+                        if let targetPath = url, let caches = cachesDirectory {
+
+                            let fileManager = FileManager.default
+                            do {
+                                try fileManager.copyItem(at: targetPath, to: caches)
+                            } catch _ {
                             }
-                            contents.setItemWith(itemType, withItemFilePath: caches.absoluteString, withItemID: caches.deletingPathExtension().lastPathComponent)
+
+                            if let session = self.argSession, let contents = session.contents {
+
+                                var itemType: ARGContentItemType = .sticker
+                                if let typeString = type {
+                                    if typeString == "filter" {
+                                        itemType = .filter
+                                    }
+                                }
+                                contents.setItemWith(itemType, withItemFilePath: caches.absoluteString, withItemID: caches.deletingPathExtension().lastPathComponent)
+                            }
                         }
                     }
                 }
+                task.resume()
+            } else {
+                
             }
-            task.resume()
-
-        }) { (code: ARGStatusCode) in
-
         }
 
         if let session = self.argSession, let auth = session.auth {

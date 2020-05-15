@@ -68,41 +68,37 @@
     NSString *type = [item type];
     NSString *title = [item title];
     
-    ARGAuthCallback callback;
-    
-    callback.Success = ^(NSString *url) {
-        
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    ARGAuthCallback callback = ^(NSString *url, ARGStatusCode code) {
+        if (code == ARGStatusCode_SUCCESS) {
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 
-        NSURL *URL = [NSURL URLWithString:url];
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+            NSURL *URL = [NSURL URLWithString:url];
+            NSURLRequest *request = [NSURLRequest requestWithURL:URL];
 
-        NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-            NSURL *cacheDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
-                                                                              inDomain:NSUserDomainMask
-                                                                     appropriateForURL:nil
-                                                                                create:NO
-                                                                                 error:nil];
+            NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                NSURL *cacheDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
+                                                                                  inDomain:NSUserDomainMask
+                                                                         appropriateForURL:nil
+                                                                                    create:NO
+                                                                                     error:nil];
 
-            return [cacheDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
-        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                return [cacheDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+            } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
 
-            if (error) {
-                failBlock();
-                return;
-            }
+                if (error) {
+                    failBlock();
+                    return;
+                }
 
-            successBlock(uuid, filePath);
-        }];
+                successBlock(uuid, filePath);
+            }];
 
-        [downloadTask resume];
-    };
-    
-    callback.Error = ^(ARGStatusCode code) {
-        
-        [self alertByCode:code];
-        failBlock();
+            [downloadTask resume];
+        } else {
+            [self alertByCode:code];
+            failBlock();
+        }
     };
 
     [[_session auth] requestSignedUrlWithUrl:fileUrl itemTitle:title itemType:type completion:callback];

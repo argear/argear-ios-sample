@@ -69,70 +69,71 @@ class NetworkManager {
                 completion(.failure(.content))
                 return
         }
-        
-        let authCallback: ARGAuthCallback = ARGAuthCallback(Success: { (url: String?) in
-            guard let url = url
-                else {
-                    completion(.failure(.auth))
-                    return
-            }
-            
-            // download task
-            let authUrl = URL(string: url)!
-            let task = URLSession.shared.downloadTask(with: authUrl) { (downloadUrl, response, error) in
-                if error != nil {
-                    completion(.failure(.network))
-                    return
-                }
-                
-                guard
-                    let httpResponse = response as? HTTPURLResponse,
-                    let response = response,
-                    let downloadUrl = downloadUrl
+
+        let authCallback : ARGAuthCallback = {(url: String?, code: ARGStatusCode) in
+            if (code.rawValue == ARGStatusCode.SUCCESS.rawValue) {
+                guard let url = url
                     else {
-                        completion(.failure(.network))
+                        completion(.failure(.auth))
                         return
                 }
                 
-                if httpResponse.statusCode == 200 {
-                    guard
-                        var cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first,
-                        let suggestedFilename = response.suggestedFilename
-                        else {
-                            completion(.failure(.content))
-                            return
-                    }
-                    cachesDirectory.appendPathComponent(suggestedFilename)
-                    
-                    let fileManager = FileManager.default
-                    // remove
-                    do {
-                        try fileManager.removeItem(at: cachesDirectory)
-                    } catch {
-                    }
-                    // copy
-                    do {
-                        try fileManager.copyItem(at: downloadUrl, to: cachesDirectory)
-                    } catch {
-                        completion(.failure(.content))
-                        return
-                    }
-                    
-                    completion(.success(cachesDirectory))
-                    return
+                // download task
+                let authUrl = URL(string: url)!
+                let task = URLSession.shared.downloadTask(with: authUrl) { (downloadUrl, response, error) in
+                   if error != nil {
+                       completion(.failure(.network))
+                       return
+                   }
+
+                   guard
+                       let httpResponse = response as? HTTPURLResponse,
+                       let response = response,
+                       let downloadUrl = downloadUrl
+                       else {
+                           completion(.failure(.network))
+                           return
+                   }
+
+                   if httpResponse.statusCode == 200 {
+                       guard
+                           var cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first,
+                           let suggestedFilename = response.suggestedFilename
+                           else {
+                               completion(.failure(.content))
+                               return
+                       }
+                       cachesDirectory.appendPathComponent(suggestedFilename)
+
+                       let fileManager = FileManager.default
+                       // remove
+                       do {
+                           try fileManager.removeItem(at: cachesDirectory)
+                       } catch {
+                       }
+                       // copy
+                       do {
+                           try fileManager.copyItem(at: downloadUrl, to: cachesDirectory)
+                       } catch {
+                           completion(.failure(.content))
+                           return
+                       }
+
+                       completion(.success(cachesDirectory))
+                       return
+                   }
+                   completion(.failure(.network))
                 }
-                completion(.failure(.network))
-            }
-            task.resume()
-            
-        }) { (code: ARGStatusCode) in
-            if code.rawValue > ARGStatusCode.VALID_AUTH.rawValue {
-                completion(.failure(.auth))
+                task.resume()
             } else {
-                completion(.failure(.network))
+                if code.rawValue > ARGStatusCode.VALID_AUTH.rawValue {
+                    completion(.failure(.auth))
+                } else {
+                    completion(.failure(.network))
+                }
             }
         }
-        
+
         auth.requestSignedUrl(withUrl: zipUrl, itemTitle: item.title ?? "", itemType: item.type ?? "", completion: authCallback)
     }
 }
