@@ -101,9 +101,9 @@ class BeautyManager {
         }
         
         if beautyRange200Array.contains(type) {
-            beautyValue = (value * 200.0) - 100.0
+            beautyValue = (beautyValue * 200.0) - 100.0
         } else {
-            beautyValue = value * 100.0
+            beautyValue = beautyValue * 100.0
         }
         
         return beautyValue

@@ -56,6 +56,8 @@ typedef NS_ENUM (NSInteger, ARGContentItemBeauty)  {
     ARGContentItemBeautyNum
 };
 
+typedef __strong void (^ARGContentsCallback)(BOOL success, NSString* _Nullable msg);
+
 @interface ARGContents : NSObject
 
 @property (nonatomic, strong) NSString *stickerItemID;
@@ -63,7 +65,8 @@ typedef NS_ENUM (NSInteger, ARGContentItemBeauty)  {
 
 - (void)setItemWithType:(ARGContentItemType)itemType
        withItemFilePath:(NSString * _Nullable)itemFilePath
-             withItemID:(NSString * _Nullable)itemId;
+             withItemID:(NSString * _Nullable)itemId
+                completion:(ARGContentsCallback _Nullable)callback;
 
 - (void)setFilterLevel:(float)level;
 

@@ -33,7 +33,6 @@ typedef NS_OPTIONS (NSInteger,ARGInferenceFeature)  {
 //    ARGInferenceFeatureBodyTracking             = 1 << 9,
 //    ARGInferenceFeatureBodyPose2D               = 1 << 10,
 //    ARGInferenceFeatureBodyPose3D               = 1 << 11,
-    ARGInferenceFeatureExtARKitFaceTracking     = 1 << 12
 };
 
 typedef NS_OPTIONS (NSInteger,ARGInferenceDebugOption)  {

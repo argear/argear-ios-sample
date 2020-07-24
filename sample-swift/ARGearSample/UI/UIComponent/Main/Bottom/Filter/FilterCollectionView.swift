@@ -52,7 +52,7 @@ extension FilterCollectionView: UICollectionViewDelegate {
         if let filters = filters {
             let filter = filters[indexPath.row - 1]
             
-            FilterManager.shared.setFilter(filter, success: { [weak self] in
+            FilterManager.shared.setFilter(filter, successBlock: { [weak self] in
                 guard let self = self else { return }
                 
                 DispatchQueue.main.async {

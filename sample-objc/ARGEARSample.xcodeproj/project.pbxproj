@@ -1283,7 +1283,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seerslab.argear.sample;
 				PRODUCT_NAME = "ARGear Sample";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1309,7 +1309,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seerslab.argear.sample;
 				PRODUCT_NAME = "ARGear Sample";
 				TARGETED_DEVICE_FAMILY = 1;

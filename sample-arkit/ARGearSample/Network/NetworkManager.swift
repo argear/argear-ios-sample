@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ARGear
+import ARGearRenderer
 
 let API_HOST = "https://apis.argear.io/api/v3/"
 let API_KEY = "48cdd456621ebddb5283f516"
@@ -74,7 +74,13 @@ class NetworkManager {
                                         itemType = .filter
                                     }
                                 }
-                                contents.setItemWith(itemType, withItemFilePath: caches.absoluteString, withItemID: caches.deletingPathExtension().lastPathComponent)
+                                contents.setItemWith(itemType, withItemFilePath: caches.absoluteString, withItemID: caches.deletingPathExtension().lastPathComponent) { (success, msg) in
+                                    if (success) {
+                                        NSLog("success");
+                                    } else {
+                                        NSLog("fail");
+                                    }
+                                }
                             }
                         }
                     }

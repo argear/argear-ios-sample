@@ -15,7 +15,7 @@
     if (self) {
         _isDisplaying = NO;
         
-        _sessionPreset = AVCaptureSessionPresetPhoto;
+        _sessionPreset = AVCaptureSessionPresetHigh;
         _currentCameraPosition = AVCaptureDevicePositionFront;
         _currentRatio = ARGMediaRatio_4x3;
         

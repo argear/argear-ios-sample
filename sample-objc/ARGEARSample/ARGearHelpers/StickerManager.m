@@ -31,21 +31,31 @@
     if ([[RealmManager shared] getDownloadFlag:item]) {
 
         [_session.contents setItemWithType:ARGContentItemTypeSticker
-                                             withItemFilePath:nil
-                                                   withItemID:[item uuid]];
-        
-        successBlock(YES);
+                          withItemFilePath:nil
+                                withItemID:[item uuid]
+                                completion:^(BOOL success, NSString * _Nullable msg) {
+            if (success) {
+                successBlock(YES);
+            } else {
+                failBlock();
+            }
+        }];
     } else {
         [ARGLoading show];
         [[NetworkManager shared] downloadItem:item success:^(NSString * _Nonnull uuid, NSURL * _Nonnull targetPath) {
             [[RealmManager shared] setDownloadFlag:item isDownload:YES];
             
-            [_session.contents setItemWithType:ARGContentItemTypeSticker
-                                                 withItemFilePath:[targetPath absoluteString]
-                                                       withItemID:[item uuid]];
-            
-            [ARGLoading hide];
-            successBlock(NO);
+            [self->_session.contents setItemWithType:ARGContentItemTypeSticker
+                                    withItemFilePath:[targetPath absoluteString]
+                                          withItemID:[item uuid]
+                                          completion:^(BOOL success, NSString * _Nullable msg) {
+                [ARGLoading hide];
+                if (success) {
+                    successBlock(NO);
+                } else {
+                    failBlock();
+                }
+            }];
         } fail:^{
             [ARGLoading hide];
             failBlock();
@@ -55,8 +65,9 @@
 
 - (void)clearSticker {
     [_session.contents setItemWithType:ARGContentItemTypeSticker
-                                         withItemFilePath:nil
-                                               withItemID:nil];
+                      withItemFilePath:nil
+                            withItemID:nil
+                            completion:nil];
     
     _selectedItemId = @"";
 }

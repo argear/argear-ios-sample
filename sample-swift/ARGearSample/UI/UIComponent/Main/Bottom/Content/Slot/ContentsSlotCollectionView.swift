@@ -55,7 +55,7 @@ extension ContentsSlotCollectionView: UICollectionViewDelegate {
                 return
             }
             
-            ContentManager.shared.setContent(content, success: { [weak self] in
+            ContentManager.shared.setContent(content, successBlock: { [weak self] in
                 guard let self = self else { return }
 
                 DispatchQueue.main.async {

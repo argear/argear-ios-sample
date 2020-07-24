@@ -17,42 +17,56 @@ class ContentManager {
     var argSession: ARGSession?
     var selectedContentId: String?
     
-    public func setContent(_ content: Item, success: @escaping ContentCompletion, fail: @escaping ContentCompletion) {
+    public func setContent(_ content: Item, successBlock: @escaping ContentCompletion, failBlock: @escaping ContentCompletion) {
         guard let session = self.argSession, let contents = session.contents, let uuid = content.uuid
             else {
-                fail()
+                failBlock()
                 return
         }
         
         if RealmManager.shared.getIsDownloaded(item: content) {
             self.selectedContentId = uuid
-            contents.setItemWith(.sticker, withItemFilePath: nil, withItemID: uuid)
-            success()
-            return
-        }
-        
-        ARGLoading.show()
-        NetworkManager.shared.downloadItem(content) { (result: Result<URL, DownloadError>) in
-
-            switch result {
-            case .success(let targetPath):
-                DispatchQueue.main.async {
-                    RealmManager.shared.setIsDownloaded(item: content, isDownloaded: true)
+            contents.setItemWith(.sticker, withItemFilePath: nil, withItemID: uuid) { (success, msg) in
+                if (success) {
+                    successBlock()
+                } else {
+                    failBlock()
                 }
-                self.selectedContentId = uuid
-                contents.setItemWith(.sticker, withItemFilePath: targetPath.absoluteString, withItemID: uuid)
-                success()
-            case .failure(.network):
-                fail()
-                break
-            case .failure(.auth):
-                fail()
-                break
-            case .failure(.content):
-                fail()
-                break
             }
-            ARGLoading.hide()
+        } else {
+            ARGLoading.show()
+            NetworkManager.shared.downloadItem(content) { (result: Result<URL, DownloadError>) in
+
+                switch result {
+                case .success(let targetPath):
+                    DispatchQueue.main.async {
+                        RealmManager.shared.setIsDownloaded(item: content, isDownloaded: true)
+                    }
+                    self.selectedContentId = uuid
+                    contents.setItemWith(.sticker, withItemFilePath: targetPath.absoluteString, withItemID: uuid) { (success, msg) in
+                        ARGLoading.hide()
+                        if (success) {
+                            successBlock()
+                        } else {
+                            failBlock()
+                        }
+                    }
+                    break;
+                case .failure(.network):
+                    ARGLoading.hide()
+                    failBlock()
+                    break
+                case .failure(.auth):
+                    ARGLoading.hide()
+                    failBlock()
+                    break
+                case .failure(.content):
+                    ARGLoading.hide()
+                    failBlock()
+                    break
+                }
+                
+            }
         }
     }
     

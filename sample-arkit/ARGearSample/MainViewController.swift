@@ -10,7 +10,7 @@ import UIKit
 import CoreMedia
 import SceneKit
 import AVFoundation
-import ARGear
+import ARGearRenderer
 import ARKit
 
 public final class MainViewController: UIViewController {
@@ -70,10 +70,9 @@ public final class MainViewController: UIViewController {
                 secretKey: API_SECRET_KEY,
                 authKey: API_AUTH_KEY
             )
-            argSession = try ARGSession(argConfig: config, feature: [.extARKitFaceTracking, .faceLowTracking])
+            argSession = try ARGSession(argConfig: config)
             argSession?.delegate = self
             argSession?.inferenceDebugOption = .optionDebugFaceLandmark2D
-            
         } catch let error as NSError {
             NSLog("Failed to initialize ARGear Session with error: %@", error.description)
         } catch let exception as NSException {
@@ -122,7 +121,7 @@ public final class MainViewController: UIViewController {
     
     // MARK: ARGScene ARKit Session
     private func sessionDidUpdateFrame(_ session: ARSession, didUpdate frame: ARFrame) {
-    
+        
         self.currentARKitFrame = frame
         
         let viewportSize = arScene.sceneView.bounds.size
@@ -214,7 +213,6 @@ public final class MainViewController: UIViewController {
         arScene.toggleScene(view: self.sceneBaseView)
         arScene.toggleSession()
 
-        
         if arkitConfiguration is ARWorldTrackingConfiguration {
             session.run()
         }
@@ -236,7 +234,7 @@ public final class MainViewController: UIViewController {
     //        contents.setBeauty(.faceSlim, value: 0.7)
             
             // set all beauties
-            var beautyValue: [Float] = [
+            let beautyValue: [Float] = [
                 10.0,
                 90.0,
                 55.0,
@@ -255,8 +253,10 @@ public final class MainViewController: UIViewController {
                 0.0
             ]
 
-            let beautyValuePointer: UnsafeMutablePointer<Float> = UnsafeMutablePointer(&beautyValue)
+            let beautyValuePointer = UnsafeMutablePointer<Float>.allocate(capacity: beautyValue.count)
+            beautyValuePointer.assign(from: beautyValue, count: beautyValue.count)
             contents.setBeautyValues(beautyValuePointer)
+            beautyValuePointer.deallocate()
         }
         sender.isSelected = !sender.isSelected
         beautyCancelLabel.isHidden = !sender.isSelected
@@ -274,9 +274,6 @@ public final class MainViewController: UIViewController {
             
             // filter download (first)
             NetworkManager.shared.downloadItem(url:"https://privatecontent.argear.io/contents/data/87942be0-f470-11e9-93ab-175806ecc470.zip", title:"azalea", type: "filter")
-            
-            // set filter (after download)
-//            contents.setItemWith(.filter, withItemFilePath: nil, withItemID: "87942be0-f470-11e9-93ab-175806ecc470")
         }
         sender.isSelected = !sender.isSelected
         filterCancelLabel.isHidden = !sender.isSelected
@@ -294,9 +291,6 @@ public final class MainViewController: UIViewController {
             
             // content download (first)
             NetworkManager.shared.downloadItem(url:"https://privatecontent.argear.io/contents/data/8371db00-599b-11e8-be0b-a11704a45e60.zip", title:"Crayon_flowerxo", type: "sticker/effects")
-            
-            // set content (after download)
-//            contents.setItemWith(.sticker, withItemFilePath: nil, withItemID: "8371db00-599b-11e8-be0b-a11704a45e60")
         }
         sender.isSelected = !sender.isSelected
         contentCancelLabel.isHidden = !sender.isSelected

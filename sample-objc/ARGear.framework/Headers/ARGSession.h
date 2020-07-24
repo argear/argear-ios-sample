@@ -65,7 +65,9 @@ typedef CGPoint (^ARGSessionProjectPointHandler) (simd_float3, UIInterfaceOrient
 - (void)pause;
 
 - (BOOL)updateSampleBuffer:(CMSampleBufferRef)sampleBuffer
-                fromConnection:(AVCaptureConnection *)connection;
+                fromConnection:(AVCaptureConnection* __nullable)connection;
+
+- (BOOL)updatePixelBuffer:(CVPixelBufferRef)pixelbuffer;
 
 - (BOOL)updateMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects
                   fromConnection:(AVCaptureConnection *)connection;
@@ -77,6 +79,18 @@ typedef CGPoint (^ARGSessionProjectPointHandler) (simd_float3, UIInterfaceOrient
                                       vertices:(const simd_float3 *)vertices
                                   viewportSize:(CGSize)viewportSize
                                        convert:(ARGSessionProjectPointHandler)convertHandler;
+
+- (id<MTLTexture>)getMetalTextureFromCVPixelBuffer:(CVPixelBufferRef)pixelbuffer
+                                 metalTextureCache:(CVMetalTextureCacheRef)textureCache;
+
+- (int)getGLTextureFromCVPixelBuffer:(CVPixelBufferRef)pixelbuffer
+                      glTextureCache:(CVOpenGLESTextureCacheRef)textureCache;
+
+- (void)setCVPixelBufferFromMTLTexture:(id<MTLTexture>)idY
+                           textureCbCr:(id<MTLTexture>)idCbCr
+                                 width:(int)width
+                                height:(int)height
+                      inoutPixelBuffer:(CVPixelBufferRef)pixelBuffer;
 
 @end
 

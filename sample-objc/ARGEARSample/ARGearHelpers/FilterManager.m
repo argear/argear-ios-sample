@@ -30,24 +30,32 @@
     
     if ([[RealmManager shared] getDownloadFlag:item]) {
         [_session.contents setItemWithType:ARGContentItemTypeFilter
-                                             withItemFilePath:nil
-                                                   withItemID:[item uuid]];
-        
-        
-        successBlock();
+                          withItemFilePath:nil
+                                withItemID:[item uuid]
+                                completion:^(BOOL success, NSString * _Nullable msg) {
+            if (success) {
+                successBlock();
+            } else {
+                failBlock();
+            }
+        }];
     } else {
         [ARGLoading show];
         [[NetworkManager shared] downloadItem:item success:^(NSString * _Nonnull uuid, NSURL * _Nonnull targetPath) {
             
             [[RealmManager shared] setDownloadFlag:item isDownload:YES];
 
-            [_session.contents setItemWithType:ARGContentItemTypeFilter
-                                                 withItemFilePath:[targetPath absoluteString]
-                                                       withItemID:[item uuid]];
-
-            
-            [ARGLoading hide];
-            successBlock();
+            [self->_session.contents setItemWithType:ARGContentItemTypeFilter
+                                    withItemFilePath:[targetPath absoluteString]
+                                          withItemID:[item uuid]
+                                          completion:^(BOOL success, NSString * _Nullable msg) {
+                [ARGLoading hide];
+                if (success) {
+                    successBlock();
+                } else {
+                    failBlock();
+                }
+            }];
         } fail:^{
             [ARGLoading hide];
             failBlock();
@@ -57,12 +65,29 @@
 
 - (void)clearFilter {
     [_session.contents setItemWithType:ARGContentItemTypeFilter
-                                         withItemFilePath:nil
-                                               withItemID:nil];
+                      withItemFilePath:nil
+                            withItemID:nil
+                            completion:nil];
 }
 
 - (void)setFilterLevel:(float)level {
-    [_session.contents setFilterLevel:level];
+    [_session.contents setFilterLevel:[self convertSliderValueToFilterLevel:level]];
+}
+
+// 0 ~ 1 -> 0 ~ 100
+- (CGFloat)convertSliderValueToFilterLevel:(CGFloat)value {
+    
+    if (value < 0) {
+        value = 0.0f;
+    }
+    
+    if (value > 1) {
+        value = 1.0f;
+    }
+    
+    value = value * 100.f;
+    
+    return value;
 }
 
 @end

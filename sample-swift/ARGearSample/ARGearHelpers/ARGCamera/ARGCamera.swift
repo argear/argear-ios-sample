@@ -16,7 +16,7 @@ class ARGCamera:NSObject, ARGCameraProtocol {
     private var captureSession: AVCaptureSession?
     private let dataOutputQueue = DispatchQueue.global(qos: .userInteractive)
     
-    var sessionPreset: AVCaptureSession.Preset = .photo
+    var sessionPreset: AVCaptureSession.Preset = .high
     @objc dynamic var ratio: ARGMediaRatio = ._4x3
 
     private let videoDataOutput = AVCaptureVideoDataOutput()
