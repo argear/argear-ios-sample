@@ -64,6 +64,12 @@ typedef CGPoint (^ARGSessionProjectPointHandler) (simd_float3, UIInterfaceOrient
 - (void)run;
 - (void)pause;
 
+- (void)setCameraConfig:(int)previewWidth
+                 height:(int)previewHeight
+            verticalFov:(float)vFov
+          horizontalFov:(float)hFov
+                 frontFacing:(BOOL)isFront;
+
 - (BOOL)updateSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 fromConnection:(AVCaptureConnection* __nullable)connection;
 
