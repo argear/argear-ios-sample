@@ -131,7 +131,7 @@ public final class MainViewController: UIViewController {
                 secretKey: API_SECRET_KEY,
                 authKey: API_AUTH_KEY
             )
-            argSession = try ARGSession(argConfig: config, feature: [.faceLowTracking])
+            argSession = try ARGSession(argConfig: config, feature: [.faceMeshTracking])
             argSession?.delegate = self
             
             let debugOption: ARGInferenceDebugOption = self.preferences.showLandmark ? .optionDebugFaceLandmark2D : .optionDebugNON
@@ -173,14 +173,6 @@ public final class MainViewController: UIViewController {
             self.serialQueue.async {
 
                 self.argSession?.update(sampleBuffer, from: connection)
-            }
-        }
-        
-        arCamera.metadataObjectsHandler = { [weak self] metadataObjects, connection in
-            guard let self = self else { return }
-            
-            self.serialQueue.async {
-                self.argSession?.update(metadataObjects, from: self.arCamera.cameraConnection!)
             }
         }
         

@@ -19,15 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                fromConnection:(AVCaptureConnection *)connection;
 
-- (void)didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects
-                  fromConnection:(AVCaptureConnection *)connection;
-
 @optional
 - (void)cameraDisplayStart;
 @end
 
 
-@interface ARGCamera : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureMetadataOutputObjectsDelegate>
+@interface ARGCamera : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic, unsafe_unretained) id <ARGCameraDelegate> _Nullable delegate;
 

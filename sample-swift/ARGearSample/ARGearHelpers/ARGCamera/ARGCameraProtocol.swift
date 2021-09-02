@@ -90,7 +90,6 @@ public protocol ARGCameraProtocol {
     var cameraDevice: AVCaptureDevice? { get set }
     var cameraConnection: AVCaptureConnection? { get set }
     
-    var metadataObjectsHandler: MetadataObjectsHandler? { get set }
     var sampleBufferHandler: SampleBufferHandler? { get set }
     
     

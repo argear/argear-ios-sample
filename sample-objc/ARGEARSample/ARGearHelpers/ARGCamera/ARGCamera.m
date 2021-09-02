@@ -78,17 +78,6 @@
     }
     _videoConnection = [videoOut connectionWithMediaType:AVMediaTypeVideo];
 
-    // init metadata output
-    AVCaptureMetadataOutput *metadataOutput = [AVCaptureMetadataOutput new];
-    [metadataOutput setMetadataObjectsDelegate:self queue:_videoDataOutputQueue];
-    if ([_captureSession canAddOutput:metadataOutput]) {
-        [_captureSession addOutput:metadataOutput];
-        
-        NSArray *objectTypes = @[AVMetadataObjectTypeFace];
-        
-        [metadataOutput setMetadataObjectTypes:[self metadataOutput:metadataOutput allowedObjectTypes:objectTypes]];
-    }
-
     _videoOrientation = [_videoConnection videoOrientation];
 }
 
@@ -127,31 +116,12 @@
     return captureDevice;
 }
 
-- (NSArray *)metadataOutput:(AVCaptureMetadataOutput *)metadataOutput allowedObjectTypes:(NSArray *)objectTypes {
-    NSSet *available = [NSSet setWithArray:metadataOutput.availableMetadataObjectTypes];
-    
-    if ([available intersectsSet:[NSSet setWithArray:objectTypes]]) {
-        return [[NSSet setWithArray:objectTypes] allObjects];
-    } else {
-        return [available allObjects];
-    }
-}
-
 // Samplebuffer delegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
       
     __weak ARGCamera *weakSelf = self;
     if (_delegate != nil && [_delegate respondsToSelector:@selector(didOutputSampleBuffer: fromConnection:)]) {
         [[weakSelf delegate] didOutputSampleBuffer:sampleBuffer fromConnection:connection];
-    }
-}
-
-// Metadata delegate
-- (void)captureOutput:(AVCaptureOutput *)output didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    
-    __weak ARGCamera *weakSelf = self;
-    if (_delegate != nil && [_delegate respondsToSelector:@selector(didOutputMetadataObjects: fromConnection:)]) {
-        [[weakSelf delegate] didOutputMetadataObjects:metadataObjects fromConnection:connection];
     }
 }
 

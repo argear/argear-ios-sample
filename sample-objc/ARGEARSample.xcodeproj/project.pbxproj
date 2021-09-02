@@ -1278,7 +1278,7 @@
 				);
 				GCC_PREFIX_HEADER = ARGEARSample/PrefixHeader.pch;
 				INFOPLIST_FILE = ARGEARSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1304,7 +1304,7 @@
 				);
 				GCC_PREFIX_HEADER = ARGEARSample/PrefixHeader.pch;
 				INFOPLIST_FILE = ARGEARSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

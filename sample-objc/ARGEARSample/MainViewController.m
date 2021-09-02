@@ -94,7 +94,7 @@
     ARGConfig *argConfig = [[ARGConfig alloc] initWithApiURL:API_HOST apiKey:API_KEY secretKey:API_SECRET_KEY authKey:API_AUTH_KEY];
 
     NSError * error;
-    ARGInferenceFeature inferenceFeature = ARGInferenceFeatureFaceLowTracking;
+    ARGInferenceFeature inferenceFeature = ARGInferenceFeatureFaceMeshTracking;
     _argSession = [[ARGSession alloc] initWithARGConfig:argConfig feature:inferenceFeature error:&error];
     _argSession.delegate = self;
 }
@@ -376,14 +376,6 @@
      
     
 }
-
-- (void)didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects
-                  fromConnection:(AVCaptureConnection *)connection {
-
-    [_argSession updateMetadataObjects:metadataObjects fromConnection:connection];
-    
-}
-
 
 
 // MARK: - ARGearSDK ARGSession delegate

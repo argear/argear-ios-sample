@@ -20,12 +20,10 @@ class ARGCamera:NSObject, ARGCameraProtocol {
     @objc dynamic var ratio: ARGMediaRatio = ._4x3
 
     private let videoDataOutput = AVCaptureVideoDataOutput()
-    private let metadataOutput = AVCaptureMetadataOutput()
     
     var cameraDevice: AVCaptureDevice?
     var cameraConnection: AVCaptureConnection?
     
-    var metadataObjectsHandler: MetadataObjectsHandler?
     var sampleBufferHandler: SampleBufferHandler?
     
     var currentCamera: CameraDeviceWithPosition = .front
@@ -55,14 +53,6 @@ class ARGCamera:NSObject, ARGCameraProtocol {
             guard captureSession.canAddOutput(videoDataOutput) else { fatalError() }
             captureSession.addOutput(videoDataOutput)
             cameraConnection = videoDataOutput.connection(with: .video)
-
-            // metadata output
-            metadataOutput.setMetadataObjectsDelegate(self, queue: dataOutputQueue)
-            guard captureSession.canAddOutput(metadataOutput) else { fatalError() }
-            captureSession.addOutput(metadataOutput)
-            if metadataOutput.availableMetadataObjectTypes.contains(.face) {
-                metadataOutput.metadataObjectTypes = [.face]
-            }
         }
 
         setupCameraConnections(with:camera)
@@ -173,11 +163,3 @@ extension ARGCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
-extension ARGCamera: AVCaptureMetadataOutputObjectsDelegate {
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        guard let metadataObjectsHandler = metadataObjectsHandler
-            else { return }
-        
-        metadataObjectsHandler(metadataObjects, connection)
-    }
-}
